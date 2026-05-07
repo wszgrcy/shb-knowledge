@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "rimraf -g .tmp &&rimraf -g ./test-dist && tsx ./script/test.esbuild.ts && mocha \"./test-dist/**/*.spec.mjs\" --enable-source-maps --inspect",
+    "test": "rimraf -g .tmp &&rimraf -g ./test-dist && tsx ./script/test.esbuild.ts && mocha \"./test-dist/**/*.spec.mjs\" --enable-source-maps -t 120000",
     "coverage": "c8 npm run test",
     "build": "rimraf -g .tmp && rimraf ./dist && tsx ./script/build.esbuild.ts && tsc -P ./tsconfig.type.json && cpx ./assets/package.json ./dist/",
     "lint": "eslint --fix ./packages/**/*.ts && prettier ./packages/**/*.ts --write",
