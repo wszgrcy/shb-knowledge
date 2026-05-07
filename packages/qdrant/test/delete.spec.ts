@@ -9,7 +9,13 @@ async function startServer() {
   const cwd = process.cwd();
   const tempDir = path.join(cwd, '.tmp', v4());
   await fs.promises.mkdir(tempDir, { recursive: true });
-  const exeFile = path.join(cwd, 'bin', 'qdrant/qdrant.exe');
+  const exeFile = path.join(
+    cwd,
+    'bin',
+    process.platform === 'win32'
+      ? `qdrant-server/qdrant.exe`
+      : `qdrant-server/qdrant`,
+  );
   const start = withResolvers();
   const instance = spawn(exeFile, {
     cwd: tempDir,

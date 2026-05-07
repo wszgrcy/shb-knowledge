@@ -68,7 +68,9 @@ describe.skip('server', () => {
         console.log(item);
       },
     });
-    existsSync(path.join(dir, 'qdrant.exe'));
+    existsSync(
+      path.join(dir, process.platform === 'win32' ? 'qdrant.exe' : 'qdrant'),
+    );
     await instance.init();
     expect(instance.start$()).true;
     const result = await instance.checkVersion('9.9.9');

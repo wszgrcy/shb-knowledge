@@ -7,7 +7,11 @@ import { QD_RUNTIME_DIR } from './qdrant-runtime-dir';
 export async function startServer() {
   const cwd = process.cwd();
   await fs.promises.mkdir(QD_RUNTIME_DIR, { recursive: true });
-  const exeFile = path.join(cwd, 'bin', 'qdrant/qdrant.exe');
+  const exeFile = path.join(
+    cwd,
+    'bin',
+    process.platform === 'win32' ? `qdrant-server/qdrant.exe` : `qdrant-server/qdrant`,
+  );
   const start = withResolvers();
   const instance = spawn(exeFile, {
     cwd: QD_RUNTIME_DIR,
