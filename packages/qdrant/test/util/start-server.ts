@@ -10,17 +10,27 @@ export async function startServer() {
   const exeFile = path.join(
     cwd,
     'bin',
-    process.platform === 'win32' ? `qdrant-server/qdrant.exe` : `qdrant-server/qdrant`,
+    process.platform === 'win32'
+      ? `qdrant-server/qdrant.exe`
+      : `qdrant-server/qdrant`,
   );
+  let qdExist = fs.existsSync(exeFile);
+  if (!qdExist) {
+    throw new Error(`服务端不存在,${exeFile}`);
+  }
+  console.log(QD_RUNTIME_DIR, exeFile);
+
   const start = withResolvers();
   const instance = spawn(exeFile, {
     cwd: QD_RUNTIME_DIR,
     env: { QDRANT__SERVICE__HTTP_PORT: '5432' },
-    // stdio: 'inherit'
   });
-  //   instance.on('')
-  instance.stdout?.on('data', (message) => {
-    if (message.toString().includes('HTTP listening')) {
+  instance.stdout?.on('data', (data) => {
+    let message = data.toString();
+    if (process.env.CI) {
+      console.log(message);
+    }
+    if (message.includes('HTTP listening')) {
       start.resolve();
     }
   });
