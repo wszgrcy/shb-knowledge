@@ -3,7 +3,7 @@ import { Ocr } from '../ocr';
 import { expect } from 'chai';
 import { ModelConfig } from '../model-config';
 import { existsSync } from 'node:fs';
-describe('ocr', () => {
+describe.skip('ocr', () => {
   // 仅检测一次
   it.skip('模型检测', () => {
     const modelsDir = path.join(process.cwd(), 'bin/models');

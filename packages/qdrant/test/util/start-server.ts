@@ -31,9 +31,9 @@ export async function startServer() {
 
   instance.stdout?.on('data', (data) => {
     let message = data.toString();
-    if (process.env.CI) {
-      console.log(message);
-    }
+    // if (process.env.CI) {
+    //   console.log(message);
+    // }
     if (message.includes('HTTP listening')) {
       start.resolve();
     }

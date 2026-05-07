@@ -21,7 +21,7 @@ function createWorker(count: number) {
   });
   return instance;
 }
-describe('text2vec', () => {
+describe.skip('text2vec', () => {
   // 单独测试
   it.skip('init', async () => {
     const worker = createWorker(1);

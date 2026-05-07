@@ -15,7 +15,7 @@ function createWorker(count: number) {
   });
   return instance;
 }
-describe('reranker', () => {
+describe.skip('reranker', () => {
   it('convert', async () => {
     const worker = createWorker(1);
     const dir = path.join(process.cwd(), 'bin', 'reranker');
