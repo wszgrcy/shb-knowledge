@@ -1,0 +1,7 @@
+list:
+  - word: 'word1'
+    content: 'content1'
+  - word: 'word2'
+    content: 'content2'
+    extra:
+      k1: 'value1'

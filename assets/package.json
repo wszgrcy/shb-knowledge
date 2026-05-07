@@ -1,0 +1,99 @@
+{
+  "name": "@shenghuabi/knowledge",
+  "version": "1.0.21",
+  "description": "知识库",
+  "author": "wszgrcy",
+  "sideEffects": false,
+  "peerDependencies": {
+    "@cyia/vfs2": "^1.1.26",
+    "handlebars": "^4.7.8",
+    "lru-cache": "^11.2.1",
+    "rfdc": "^1.4.1",
+    "rxjs": "^7.8.2",
+    "static-injector": "^6.1.2",
+    "yaml": "^2.7.0",
+    "valibot": "^1.1.0",
+    "uuid": ">=11.1.0",
+    "magic-string": "^0.30.18",
+    "lodash-es": "^4.17.21",
+    "html-to-text": "^9.0.5",
+    "fastq": "^1.19.1",
+    "sharp": "0.34.2",
+    "@cyia/dl": "^1.0.15",
+    "@cyia/external-call": "^1.0.35"
+  },
+  "dependencies": {
+    "html-entities": "^2.6.0",
+    "@qdrant/qdrant-js": "1.15.1",
+    "@cyia/mdict-reader": "^1.0.9",
+    "@langchain/community": "^1.1.1",
+    "@langchain/core": "1.1.8",
+    "@langchain/textsplitters": "^1.0.1",
+    "@xhmikosr/decompress-tarbz2": "^8.0.2",
+    "chardet": "^2.1.0",
+    "d3-dsv": "^2.0.0",
+    "decompress": "^4.2.1",
+    "domutils": "^3.2.2",
+    "epub2": "^3.0.2",
+    "file-type": "^21.0.0",
+    "graphology": "^0.26.0",
+    "graphology-types": "^0.24.8",
+    "iconv-lite": "^0.7.0",
+    "mammoth": "^1.9.0",
+    "officeparser": "^4.2.0",
+    "pdf-parse": "^1.1.1",
+    "srt-parser-2": "^1.2.3",
+    "heic-decode": "^2.1.0",
+    "@gutenye/ocr-common": "^1.4.8",
+    "bmp-js": "^0.1.0",
+    "onnxruntime-node": "1.20.1",
+    "@huggingface/transformers": "3.7.2",
+    "xlsx": "^0.18.5",
+    "pdfjs-dist": "^5.4.449"
+  },
+  "overrides": {
+    "@huggingface/transformers": {
+      "onnxruntime-node": {
+        ".": "1.20.1"
+      }
+    }
+  },
+  "exports": {
+    "./embedding": {
+      "types": "./embedding/index.d.ts",
+      "import": "./embedding.mjs"
+    },
+    "./file-parser": {
+      "types": "./file-parser/index.d.ts",
+      "import": "./file-parser.mjs"
+    },
+    "./knowledge": {
+      "types": "./knowledge/index.d.ts",
+      "import": "./knowledge.mjs"
+    },
+    "./qdrant": {
+      "types": "./qdrant/index.d.ts",
+      "import": "./qdrant.mjs"
+    },
+    "./util": {
+      "types": "./util/index.d.ts",
+      "import": "./util.mjs"
+    },
+    "./image": {
+      "types": "./image/index.d.ts",
+      "import": "./image.mjs"
+    },
+    "./ocr": {
+      "types": "./ocr/index.d.ts",
+      "import": "./ocr.mjs"
+    },
+    "./worker/ocr": {
+      "types": "./worker/ocr/index.d.ts",
+      "import": "./worker/ocr.mjs"
+    },
+    "./worker/text2vec": {
+      "types": "./worker/text2vec/index.d.ts",
+      "import": "./worker/text2vec.mjs"
+    }
+  }
+}

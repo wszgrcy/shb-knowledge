@@ -1,0 +1,62 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: init
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@gmail.com"
+
+      - name: pull-code
+        uses: actions/checkout@v6
+
+      - name: install-node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: install-dependencies
+        run: |
+          npm ci
+
+      - name: download-qdrant-server
+        run: |
+          mkdir -p bin/qdrant-server
+          curl -L https://github.com/qdrant/qdrant/releases/download/v1.15.1/qdrant-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C bin/qdrant-server
+          ls -lh
+          ls ./bin
+          ls ./bin/qdrant-server
+      - name: test
+        run: |
+          npm test
+
+      - name: build
+        run: |
+          npm run build
+
+      - id: publish
+        name: publish
+        uses: JS-DevTools/npm-publish@v4
+        with:
+          package: ./dist/package.json
+          provenance: true
+          access: public
+
+      - if: steps.publish.outputs.old-version != steps.publish.outputs.version
+        run: |
+          echo "[${{ steps.publish.outputs.type }}] Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }}"
+          git tag v${{ steps.publish.outputs.version }}
+          git push origin v${{ steps.publish.outputs.version }}

@@ -1,0 +1,7 @@
+/qdrant
+/text2vec
+/models
+/**/*.onnx
+/ocr
+/reranker
+/qdrant-server

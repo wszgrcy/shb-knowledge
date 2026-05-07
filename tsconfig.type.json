@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+  },
+  "files": [
+    "./packages/file-parser/dict/type.d.ts",
+    "./packages/embedding/index.ts",
+    "./packages/file-parser/index.ts",
+    "./packages/knowledge/index.ts",
+    "./packages/qdrant/index.ts",
+    "./packages/util/index.ts",
+    "./packages/image/index.ts",
+    "./packages/ocr/index.ts",
+    "./packages/worker/ocr/index.ts",
+    "./packages/worker/text2vec/index.ts",
+    "./packages/typing.d.ts"
+  ],
+  "include": []
+}
