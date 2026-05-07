@@ -7,7 +7,6 @@
     "test": "rimraf -g .tmp &&rimraf -g ./test-dist && tsx ./script/test.esbuild.ts && mocha \"./test-dist/**/*.spec.mjs\" --enable-source-maps --inspect",
     "coverage": "c8 npm run test",
     "build": "rimraf -g .tmp && rimraf ./dist && tsx ./script/build.esbuild.ts && tsc -P ./tsconfig.type.json && cpx ./assets/package.json ./dist/",
-    "local-publish": "npm run build && npm --registry=http://lan-server.chloc:5555 publish ./dist",
     "lint": "eslint --fix ./packages/**/*.ts && prettier ./packages/**/*.ts --write",
     "postinstall": "patch-package"
   },
