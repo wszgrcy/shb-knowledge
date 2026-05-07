@@ -2,11 +2,11 @@ import { path } from '@cyia/vfs2';
 import Tinypool from 'tinypool';
 import { expect } from 'chai';
 import { MessageChannel } from 'node:worker_threads';
+import { pathToFileURL } from 'node:url';
 function createWorker(count: number) {
   const instance = new Tinypool({
-    filename: new URL(
-      'file:/' + path.join(process.cwd(), 'test-dist/worker/reranker.mjs'),
-      import.meta.url,
+    filename: pathToFileURL(
+      path.join(process.cwd(), 'test-dist/worker/reranker.mjs'),
     ).href,
     // maxThreads: count,
     // maxQueue: 9999,
@@ -15,7 +15,7 @@ function createWorker(count: number) {
   });
   return instance;
 }
-describe.skip('reranker', () => {
+describe('reranker', () => {
   it('convert', async () => {
     const worker = createWorker(1);
     const dir = path.join(process.cwd(), 'bin', 'reranker');
@@ -45,7 +45,7 @@ describe.skip('reranker', () => {
         dir: dir,
         modelName: modelName,
         options: {
-          device:process.env.CI ? 'cpu' : 'dml',
+          device: process.env.CI ? 'cpu' : 'dml',
           dtype: 'fp32',
         },
         remoteHost: 'hg-model.tbontop.top',

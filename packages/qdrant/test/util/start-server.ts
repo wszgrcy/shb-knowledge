@@ -18,7 +18,6 @@ export async function startServer() {
   if (!qdExist) {
     throw new Error(`服务端不存在,${exeFile}`);
   }
-  console.log(QD_RUNTIME_DIR, exeFile);
 
   const start = withResolvers();
   if (dispose) {

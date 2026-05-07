@@ -8,11 +8,11 @@ import { BatchQueue, isTruthy, CacheQueue } from '@shenghuabi/knowledge/util';
 import { promise as fastq } from 'fastq';
 import { expect } from 'chai';
 import { DslParseService } from '../../file-parser/dict/dict-format/dsl/dsl-parse.service';
+import { pathToFileURL } from 'node:url';
 function createWorker(count: number) {
   const instance = new Tinypool({
-    filename: new URL(
-      'file:/' + path.join(process.cwd(), 'test-dist/worker/text2vec.mjs'),
-      import.meta.url,
+    filename: pathToFileURL(
+      path.join(process.cwd(), 'test-dist/worker/text2vec.mjs'),
     ).href,
     maxThreads: count,
     maxQueue: 9999,
@@ -35,7 +35,7 @@ describe.skip('text2vec', () => {
         dir: dir,
         modelName: 'Xenova/bge-base-zh-v1.5',
         options: {
-          device:process.env.CI ? 'cpu' : 'dml',
+          device: process.env.CI ? 'cpu' : 'dml',
           dtype: 'fp16',
         },
         port: port1,
@@ -90,7 +90,7 @@ describe.skip('text2vec', () => {
           dir: dir,
           modelName: 'Xenova/bge-base-zh-v1.5',
           options: {
-            device: process.env.CI ? 'cpu' :'dml',
+            device: process.env.CI ? 'cpu' : 'dml',
             dtype: 'fp16',
           },
           port: port1,
@@ -105,7 +105,7 @@ describe.skip('text2vec', () => {
             dir: dir,
             modelName: 'Xenova/bge-base-zh-v1.5',
             options: {
-              device:process.env.CI ? 'cpu' : 'dml',
+              device: process.env.CI ? 'cpu' : 'dml',
               dtype: 'fp16',
             },
           },
@@ -246,7 +246,7 @@ describe.skip('text2vec', () => {
       dir: dir,
       modelName: 'Xenova/bge-base-zh-v1.5',
       options: {
-        device:process.env.CI ? 'cpu' : 'dml',
+        device: process.env.CI ? 'cpu' : 'dml',
         dtype: 'fp16',
       },
       remoteHost: 'hg-model.tbontop.top',
@@ -272,7 +272,7 @@ describe.skip('text2vec', () => {
       dir: dir,
       modelName: `onnx-community/Qwen3-Embedding-0.6B-ONNX`,
       options: {
-        device:process.env.CI ? 'cpu' : 'dml',
+        device: process.env.CI ? 'cpu' : 'dml',
         dtype: 'fp16',
       },
       mode: 'qwen3',
