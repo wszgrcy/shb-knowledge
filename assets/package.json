@@ -1,6 +1,6 @@
 {
   "name": "@shenghuabi/knowledge",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "知识库",
   "author": "wszgrcy",
   "sideEffects": false,
@@ -95,5 +95,11 @@
       "types": "./worker/text2vec/index.d.ts",
       "import": "./worker/text2vec.mjs"
     }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "url": "https://github.com/wszgrcy/shb-knowledge"
   }
 }
