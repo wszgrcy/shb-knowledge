@@ -78,9 +78,8 @@ describe('text2vec', () => {
     for (const testItem of testList) {
       const { port1, port2 } = new MessageChannel();
       const p1 = new Tinypool({
-        filename: new URL(
-          'file:/' + path.join(process.cwd(), 'test-dist/worker/text2vec.mjs'),
-          import.meta.url,
+        filename: pathToFileURL(
+          path.join(process.cwd(), 'test-dist/worker/text2vec.mjs'),
         ).href,
         maxThreads: testItem.workerCount,
         concurrentTasksPerWorker: 2,

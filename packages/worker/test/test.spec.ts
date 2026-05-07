@@ -1,11 +1,11 @@
 import { path } from '@cyia/vfs2';
 import Tinypool from 'tinypool';
 import { expect } from 'chai';
+import { pathToFileURL } from 'node:url';
 function createWorker(count: number) {
   const instance = new Tinypool({
-    filename: new URL(
-      'file:/' + path.join(process.cwd(), 'test-dist/worker/wait.mjs'),
-      import.meta.url,
+    filename: pathToFileURL(
+      path.join(process.cwd(), 'test-dist/worker/wait.mjs'),
     ).href,
     maxThreads: count,
     maxQueue: 9999,
