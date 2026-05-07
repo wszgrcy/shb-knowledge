@@ -72,6 +72,7 @@ describe('ocr', () => {
         ocrConfig: {
           key: 'ch_mobile',
           modelDir: dir,
+          device: process.env.CI ? 'cpu' : undefined,
         },
       },
       { name: 'convert', runtime: 'worker_threads' },
