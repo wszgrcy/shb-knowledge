@@ -19,7 +19,7 @@ describe('ocr', () => {
       expect(existsSync(path.join(path.join(modelsDir), item.rec)));
     }
   });
-  const list = ['bmp'];
+  const list = ['bmp', 'gif', 'heic', 'jpg', 'png', 'tif', 'webp', 'avif'];
   for (const item of list) {
     it(item, async () => {
       const cwd = path.join(
