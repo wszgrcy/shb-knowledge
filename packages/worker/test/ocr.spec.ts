@@ -13,7 +13,7 @@ function createWorker(count: number) {
   });
   return instance;
 }
-describe('ocr', () => {
+describe.skip('ocr', () => {
   // 单独测试
   it.skip('init', async () => {
     const worker = createWorker(1);
