@@ -35,7 +35,7 @@ describe('text2vec', () => {
         dir: dir,
         modelName: 'Xenova/bge-base-zh-v1.5',
         options: {
-          device: 'dml',
+          device:process.env.CI ? 'cpu' : 'dml',
           dtype: 'fp16',
         },
         port: port1,
@@ -90,7 +90,7 @@ describe('text2vec', () => {
           dir: dir,
           modelName: 'Xenova/bge-base-zh-v1.5',
           options: {
-            device: 'dml',
+            device: process.env.CI ? 'cpu' :'dml',
             dtype: 'fp16',
           },
           port: port1,
@@ -105,7 +105,7 @@ describe('text2vec', () => {
             dir: dir,
             modelName: 'Xenova/bge-base-zh-v1.5',
             options: {
-              device: 'dml',
+              device:process.env.CI ? 'cpu' : 'dml',
               dtype: 'fp16',
             },
           },
@@ -246,7 +246,7 @@ describe('text2vec', () => {
       dir: dir,
       modelName: 'Xenova/bge-base-zh-v1.5',
       options: {
-        device: 'dml',
+        device:process.env.CI ? 'cpu' : 'dml',
         dtype: 'fp16',
       },
       remoteHost: 'hg-model.tbontop.top',
@@ -272,7 +272,7 @@ describe('text2vec', () => {
       dir: dir,
       modelName: `onnx-community/Qwen3-Embedding-0.6B-ONNX`,
       options: {
-        device: 'dml',
+        device:process.env.CI ? 'cpu' : 'dml',
         dtype: 'fp16',
       },
       mode: 'qwen3',

@@ -16,14 +16,14 @@ export async function transformersText2Vec<T extends string | string[]>(
     instance = await pipeline(
       'feature-extraction',
       'Xenova/ernie-3.0-micro-zh',
-      { device: 'dml', dtype: 'fp16' },
+      { device: process.env.CI ? 'cpu' : 'dml', dtype: 'fp16' },
     );
   } else if (collectionName.includes('312')) {
     // 默认name
     instance = await pipeline(
       'feature-extraction',
       'Xenova/ernie-3.0-nano-zh',
-      { device: 'dml', dtype: 'fp16' },
+      { device: process.env.CI ? 'cpu' : 'dml', dtype: 'fp16' },
     );
   } else {
     throw '无效名字';

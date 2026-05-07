@@ -29,7 +29,7 @@ describe('reranker', () => {
         dir: dir,
         modelName: modelName,
         options: {
-          device: 'dml',
+          device: process.env.CI ? 'cpu' : 'dml',
           dtype: 'q4',
         },
         port: port1,
@@ -45,7 +45,7 @@ describe('reranker', () => {
         dir: dir,
         modelName: modelName,
         options: {
-          device: 'dml',
+          device:process.env.CI ? 'cpu' : 'dml',
           dtype: 'fp32',
         },
         remoteHost: 'hg-model.tbontop.top',
