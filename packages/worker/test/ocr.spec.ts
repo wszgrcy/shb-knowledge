@@ -1,6 +1,7 @@
 import { createNormalizeVfs, path } from '@cyia/vfs2';
 import Tinypool from 'tinypool';
 import { expect } from 'chai';
+import { init } from '../ocr';
 function createWorker(count: number) {
   const instance = new Tinypool({
     filename: new URL(
@@ -13,15 +14,20 @@ function createWorker(count: number) {
   });
   return instance;
 }
-describe.skip('ocr', () => {
+
+describe('ocr', () => {
+  const dir = path.join(process.cwd(), 'bin', 'ocr');
   // 单独测试
+  before(async () => {
+    await init({ modelDir: dir, key: 'ch_mobile' });
+  });
   it.skip('init', async () => {
     const worker = createWorker(1);
-    const dir = path.join(process.cwd(), 'bin', 'ocr');
     const { port1, port2 } = new MessageChannel();
     port2.on('message', (value) => {
       console.log('信息', value);
     });
+
     const result = await worker.run(
       {
         key: 'ch_mobile',
@@ -33,10 +39,10 @@ describe.skip('ocr', () => {
     port2.close();
 
     const fs = createNormalizeVfs({ dir: dir });
-    const exists1 = await fs.exists('det/ch_PP-OCRv4_det_infer.onnx');
-    const exists2 = await fs.exists('rec/ch_PP-OCRv4_rec_infer.onnx');
+    const exists1 = await fs.exists('det/ch_PP-OCRv4_det_mobile.onnx');
+    const exists2 = await fs.exists('rec/ch_PP-OCRv4_rec_mobile.onnx');
     const exists3 = await fs.exists(
-      'rec/ch_PP-OCRv4_rec_infer/ppocr_keys_v1.txt',
+      'rec/ch_PP-OCRv4_rec_mobile/ppocr_keys_v1.txt',
     );
     expect(exists1).eq(true);
     expect(exists2).eq(true);
@@ -44,7 +50,6 @@ describe.skip('ocr', () => {
   });
   it('convert', async () => {
     const worker = createWorker(1);
-    const dir = path.join(process.cwd(), 'bin', 'ocr');
     const { port1, port2 } = new MessageChannel();
     const filePath = path.join(
       process.cwd(),
