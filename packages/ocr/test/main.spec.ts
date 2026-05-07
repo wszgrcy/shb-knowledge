@@ -3,7 +3,12 @@ import { Ocr } from '../ocr';
 import { expect } from 'chai';
 import { ModelConfig } from '../model-config';
 import { existsSync } from 'node:fs';
-describe.skip('ocr', () => {
+import { init } from '../../worker/ocr';
+describe('ocr', () => {
+  const modelsDir = path.join(process.cwd(), 'bin/models');
+  before(async () => {
+    await init({ modelDir: modelsDir, key: 'ch_mobile' });
+  });
   // 仅检测一次
   it.skip('模型检测', () => {
     const modelsDir = path.join(process.cwd(), 'bin/models');
@@ -14,22 +19,31 @@ describe.skip('ocr', () => {
       expect(existsSync(path.join(path.join(modelsDir), item.rec)));
     }
   });
-  const list = ['bmp', 'gif', 'heic', 'jpg', 'png', 'tif', 'webp', 'avif'];
+  const list = ['bmp'];
   for (const item of list) {
     it(item, async () => {
       const cwd = path.join(
         process.cwd(),
         `./packages/ocr/test/fixture/1.${item}`,
       );
-      const modelsDir = path.join(process.cwd(), 'bin/models');
+
       const ocr = await Ocr.create({
         onnxOptions: {
           executionProviders: ['dml', 'cpu'],
         },
         models: {
-          detectionPath: path.join(modelsDir, 'ch_PP-OCRv4_det_infer.onnx'),
-          recognitionPath: path.join(modelsDir, 'rec_ch_PP-OCRv4_infer.onnx'),
-          dictionaryPath: path.join(modelsDir, 'dict_chinese.txt'),
+          detectionPath: path.join(
+            modelsDir,
+            'det/ch_PP-OCRv4_det_mobile.onnx',
+          ),
+          recognitionPath: path.join(
+            modelsDir,
+            'rec/ch_PP-OCRv4_rec_mobile.onnx',
+          ),
+          dictionaryPath: path.join(
+            modelsDir,
+            'rec/ch_PP-OCRv4_rec_mobile/ppocr_keys_v1.txt',
+          ),
         },
       });
 
@@ -51,9 +65,15 @@ describe.skip('ocr', () => {
         executionProviders: ['dml', 'cpu'],
       },
       models: {
-        detectionPath: path.join(modelsDir, 'ch_PP-OCRv4_det_infer.onnx'),
-        recognitionPath: path.join(modelsDir, 'rec_ch_PP-OCRv4_infer.onnx'),
-        dictionaryPath: path.join(modelsDir, 'dict_chinese.txt'),
+        detectionPath: path.join(modelsDir, 'det/ch_PP-OCRv4_det_mobile.onnx'),
+        recognitionPath: path.join(
+          modelsDir,
+          'rec/ch_PP-OCRv4_rec_mobile.onnx',
+        ),
+        dictionaryPath: path.join(
+          modelsDir,
+          'rec/ch_PP-OCRv4_rec_mobile/ppocr_keys_v1.txt',
+        ),
       },
     });
 

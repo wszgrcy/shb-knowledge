@@ -14,10 +14,10 @@ const DictUrl =
 async function init(ocrConfig: {
   key: string;
   modelDir: string;
-  port: MessagePort;
+  port?: MessagePort;
 }) {
   const messageCb = (message: any) => {
-    ocrConfig.port.postMessage({ type: 'progress', message });
+    ocrConfig.port?.postMessage({ type: 'progress', message });
   };
   const modelConfig = ModelConfig.find((item) => item.key === ocrConfig.key)!;
   const fs = createNormalizeVfs({ dir: ocrConfig.modelDir });
