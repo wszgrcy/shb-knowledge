@@ -15,9 +15,9 @@
   "private": true,
   "dependencies": {
     "@cyia/mdict-reader": "^1.0.10",
-    "@cyia/dl": "^1.5.2",
-    "@cyia/external-call": "^1.5.2",
-    "@cyia/vfs2": "^1.5.2",
+    "@cyia/dl": "^1.5.3",
+    "@cyia/external-call": "^1.5.3",
+    "@cyia/vfs2": "^1.5.3",
     "@gutenye/ocr-common": "^1.4.8",
     "@langchain/community": "^1.1.1",
     "@langchain/core": "1.1.8",
@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
-    "@huggingface/transformers": "3.7.2",
+    "@huggingface/transformers": "4.2.0",
     "@types/bmp-js": "^0.1.2",
     "@types/chai": "^5.0.1",
     "@types/decompress": "^4.2.7",

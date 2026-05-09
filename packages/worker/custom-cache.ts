@@ -24,7 +24,22 @@ export class FileProxyCache {
     this.#downloadConfig = initOptions.downloadConfig;
     this.#initOptions = initOptions;
   }
-  async match(request: string): Promise<FileResponse | undefined> {
+  async #createResponse(filePath: string): Promise<Response> {
+    const stats = await fs.promises.stat(filePath);
+    const extension = filePath.split('.').pop()!.toLowerCase();
+    const contentType =
+      (CONTENT_TYPE_MAP as any)[extension] ?? 'application/octet-stream';
+    const stream = fs.createReadStream(filePath);
+    return new Response(stream, {
+      status: 200,
+      statusText: 'OK',
+      headers: {
+        'content-type': contentType,
+        'content-length': stats.size.toString(),
+      },
+    });
+  }
+  async match(request: string): Promise<Response | undefined> {
     let filePath;
     if (request.startsWith('http')) {
       const data = new URL(request);
@@ -53,17 +68,16 @@ export class FileProxyCache {
     }
     const exists = await this.#vfs.exists(filePath);
     if (exists) {
-      return new FileResponse(filePath);
+      return this.#createResponse(filePath);
     }
     return undefined;
   }
 
-  async put(request: string, response: Response | FileResponse): Promise<void> {
+  async put(request: string, response: Response): Promise<void> {
     throw new Error('no put');
   }
 }
-const decoder = new TextDecoder('utf-8');
-const CONTENT_TYPE_MAP = {
+const CONTENT_TYPE_MAP: Record<string, string> = {
   txt: 'text/plain',
   html: 'text/html',
   css: 'text/css',
@@ -74,59 +88,3 @@ const CONTENT_TYPE_MAP = {
   jpeg: 'image/jpeg',
   gif: 'image/gif',
 };
-class FileResponse {
-  filePath;
-  headers;
-  exists = true;
-  status = 200;
-  statusText = 'OK';
-  body;
-  constructor(filePath: string) {
-    this.filePath = filePath;
-    this.headers = new Headers();
-
-    this.updateContentType();
-
-    this.body = fs.createReadStream(filePath);
-  }
-
-  updateContentType() {
-    const stats = fs.statSync(this.filePath);
-    this.headers.set('content-length', stats.size.toString());
-
-    const extension = this.filePath.toString().split('.').pop()!.toLowerCase();
-    this.headers.set(
-      'content-type',
-      (CONTENT_TYPE_MAP as any)[extension] ?? 'application/octet-stream',
-    );
-  }
-
-  clone(): FileResponse {
-    const response = new FileResponse(this.filePath);
-    response.exists = this.exists;
-    response.status = this.status;
-    response.statusText = this.statusText;
-    response.headers = new Headers(this.headers);
-    return response;
-  }
-
-  async arrayBuffer(): Promise<ArrayBuffer> {
-    return fs.promises
-      .readFile(this.filePath)
-      .then((buffer) => buffer.buffer as ArrayBuffer);
-  }
-
-  async blob(): Promise<Blob> {
-    return new Blob([await this.arrayBuffer()], {
-      type: this.headers.get('content-type')!,
-    });
-  }
-
-  async text(): Promise<string> {
-    return decoder.decode(await this.arrayBuffer());
-  }
-
-  async json(): Promise<object> {
-    return JSON.parse(await this.text());
-  }
-}
