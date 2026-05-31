@@ -1,6 +1,6 @@
 {
   "name": "@shenghuabi/knowledge",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "知识库",
   "author": "wszgrcy",
   "sideEffects": false,
@@ -46,17 +46,10 @@
     "heic-decode": "^2.1.0",
     "@gutenye/ocr-common": "^1.4.8",
     "bmp-js": "^0.1.0",
-    "onnxruntime-node": "1.20.1",
+    "onnxruntime-node": "1.24.3",
     "@huggingface/transformers": "4.2.0",
     "xlsx": "^0.18.5",
-    "pdfjs-dist": "^5.4.449"
-  },
-  "overrides": {
-    "@huggingface/transformers": {
-      "onnxruntime-node": {
-        ".": "1.20.1"
-      }
-    }
+    "pdfjs-dist": "~5.4.449"
   },
   "exports": {
     "./embedding": {
