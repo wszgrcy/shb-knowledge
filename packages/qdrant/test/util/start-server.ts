@@ -30,9 +30,9 @@ export async function startServer() {
 
   instance.stdout?.on('data', (data) => {
     let message = data.toString();
-    // if (process.env.CI) {
-    //   console.log(message);
-    // }
+    if (process.env.CI) {
+      console.log(message);
+    }
     if (message.includes('HTTP listening')) {
       start.resolve();
     }
@@ -50,6 +50,9 @@ export async function startServer() {
         .rm(QD_RUNTIME_DIR, { recursive: true, force: true })
         .then(() => {
           end.resolve();
+          console.log('关闭')
+        }).catch((rej ) => {
+          console.log('catch',rej)
         });
     });
     instance.kill();
