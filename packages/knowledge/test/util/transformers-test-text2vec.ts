@@ -15,14 +15,14 @@ export async function transformersText2Vec<T extends string | string[]>(
   if (collectionName.includes('384')) {
     instance = await pipeline(
       'feature-extraction',
-      'Xenova/ernie-3.0-micro-zh',
+      'Xenova/jina-embeddings-v2-small-en',
       { device: process.env.CI ? 'cpu' : 'dml', dtype: 'fp16' },
     );
   } else if (collectionName.includes('312')) {
     // 默认name
     instance = await pipeline(
       'feature-extraction',
-      'Xenova/ernie-3.0-nano-zh',
+      'Xenova/jina-embeddings-v2-small-en',
       { device: process.env.CI ? 'cpu' : 'dml', dtype: 'fp16' },
     );
   } else {
