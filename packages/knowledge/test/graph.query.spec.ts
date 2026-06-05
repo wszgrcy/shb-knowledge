@@ -54,7 +54,7 @@ describe('图查询', () => {
 
     await instance.create(name, {
       collectionName: name,
-      size: 312,
+      size: 512,
     });
     const collection2 = {
       collectionName: '384',
@@ -160,7 +160,7 @@ describe('图查询', () => {
 
     await instance.create(name, {
       collectionName: name,
-      size: 312,
+      size: 512,
     });
     const collection2 = {
       collectionName: '384',
@@ -202,7 +202,7 @@ describe('图查询', () => {
 
     await instance.create(name, {
       collectionName: name,
-      size: 312,
+      size: 512,
     });
     const collection2 = {
       collectionName: '384',
@@ -299,7 +299,7 @@ describe('图查询', () => {
 
     await instance.create(name, {
       collectionName: name,
-      size: 312,
+      size: 512,
     });
     const collection2 = {
       collectionName: '384',
@@ -398,7 +398,7 @@ describe('图查询', () => {
 
     await instance.create(name, {
       collectionName: name,
-      size: 312,
+      size: 512,
     });
     const collection2 = {
       collectionName: '384',
