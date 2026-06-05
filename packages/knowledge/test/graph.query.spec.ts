@@ -58,7 +58,7 @@ describe('图查询', () => {
     });
     const collection2 = {
       collectionName: '384',
-      size: 384,
+      size: 512,
     } as GraphCollectionInlineType;
     await instance.addCollection(name, collection2);
 
@@ -164,7 +164,7 @@ describe('图查询', () => {
     });
     const collection2 = {
       collectionName: '384',
-      size: 384,
+      size: 512,
     } as GraphCollectionInlineType;
     await instance.addCollection(name, collection2);
 
@@ -206,7 +206,7 @@ describe('图查询', () => {
     });
     const collection2 = {
       collectionName: '384',
-      size: 384,
+      size: 512,
     } as GraphCollectionInlineType;
     await instance.addCollection(name, collection2);
 
@@ -303,7 +303,7 @@ describe('图查询', () => {
     });
     const collection2 = {
       collectionName: '384',
-      size: 384,
+      size: 512,
     } as GraphCollectionInlineType;
     await instance.addCollection(name, collection2);
 
@@ -402,7 +402,7 @@ describe('图查询', () => {
     });
     const collection2 = {
       collectionName: '384',
-      size: 384,
+      size: 512,
     } as GraphCollectionInlineType;
     await instance.addCollection(name, collection2);
 
