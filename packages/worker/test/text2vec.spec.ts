@@ -36,7 +36,7 @@ describe('text2vec', () => {
         modelName: 'Xenova/bge-base-zh-v1.5',
         options: {
           device: process.env.CI ? 'cpu' : 'dml',
-          dtype: 'fp16',
+          dtype: 'fp4',
         },
         port: port1,
       },
@@ -90,7 +90,7 @@ describe('text2vec', () => {
           modelName: 'Xenova/bge-base-zh-v1.5',
           options: {
             device: process.env.CI ? 'cpu' : 'dml',
-            dtype: 'fp16',
+            dtype: 'fp4',
           },
           port: port1,
           remoteHost: 'hg-model.tbontop.top',
@@ -105,7 +105,7 @@ describe('text2vec', () => {
             modelName: 'Xenova/bge-base-zh-v1.5',
             options: {
               device: process.env.CI ? 'cpu' : 'dml',
-              dtype: 'fp16',
+              dtype: 'fp4',
             },
           },
           { name: 'convert' },
@@ -246,7 +246,7 @@ describe('text2vec', () => {
       modelName: 'Xenova/bge-base-zh-v1.5',
       options: {
         device: process.env.CI ? 'cpu' : 'dml',
-        dtype: 'fp16',
+        dtype: 'fp4',
       },
       remoteHost: 'hg-model.tbontop.top',
     };

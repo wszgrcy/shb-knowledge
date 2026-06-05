@@ -54,7 +54,7 @@
     "onnxruntime-node": "1.24.3",
     "patch-package": "^8.0.0",
     "pdf-parse": "^1.1.1",
-    "pdfjs-dist": "~5.4.449",
+    "pdfjs-dist": "5.4.449",
     "rfdc": "^1.4.1",
     "rxjs": "^7.8.2",
     "sharp": "0.34.2",

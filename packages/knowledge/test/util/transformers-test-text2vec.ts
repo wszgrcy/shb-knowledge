@@ -16,14 +16,14 @@ export async function transformersText2Vec<T extends string | string[]>(
     instance = await pipeline(
       'feature-extraction',
       'Xenova/jina-embeddings-v2-small-en',
-      { device: process.env.CI ? 'cpu' : 'dml', dtype: 'fp16' },
+      { device: process.env.CI ? 'cpu' : 'dml', dtype: 'q4' },
     );
   } else if (collectionName.includes('312')) {
     // 默认name
     instance = await pipeline(
       'feature-extraction',
       'Xenova/jina-embeddings-v2-small-en',
-      { device: process.env.CI ? 'cpu' : 'dml', dtype: 'fp16' },
+      { device: process.env.CI ? 'cpu' : 'dml', dtype: 'q4' },
     );
   } else {
     throw '无效名字';
