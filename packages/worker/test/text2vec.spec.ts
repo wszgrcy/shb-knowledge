@@ -93,7 +93,7 @@ describe('text2vec', () => {
             dtype: 'fp4',
           },
           port: port1,
-          remoteHost: 'hg-model.tbontop.top',
+          remoteHost: 'huggingface.co',
         },
         { name: 'init', transferList: [port1] },
       );
@@ -248,7 +248,7 @@ describe('text2vec', () => {
         device: process.env.CI ? 'cpu' : 'dml',
         dtype: 'fp4',
       },
-      remoteHost: 'hg-model.tbontop.top',
+      remoteHost: 'huggingface.co',
     };
     await worker.run(initOptions, { name: 'init', transferList: [] });
     const start = Date.now();
@@ -275,7 +275,7 @@ describe('text2vec', () => {
         dtype: 'fp16',
       },
       mode: 'qwen3',
-      remoteHost: 'hg-model.tbontop.top',
+      remoteHost: 'huggingface.co',
     };
     await worker.run(initOptions, { name: 'init', transferList: [] });
 

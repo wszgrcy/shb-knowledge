@@ -33,7 +33,7 @@ describe('reranker', () => {
           dtype: 'q4',
         },
         port: port1,
-        remoteHost: 'hg-model.tbontop.top',
+        remoteHost: 'huggingface.co',
       },
       { name: 'init', transferList: [port1] },
     );
@@ -48,7 +48,7 @@ describe('reranker', () => {
           device: process.env.CI ? 'cpu' : 'dml',
           dtype: 'fp32',
         },
-        remoteHost: 'hg-model.tbontop.top',
+        remoteHost: 'huggingface.co',
       },
       { name: 'convert' },
     );

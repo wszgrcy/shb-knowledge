@@ -14,6 +14,15 @@ export class FileProxyCache {
   #modelName;
   #downloadConfig;
   #initOptions;
+  #downloadPromises = new Map<
+    string,
+    Promise<
+      | {
+          getFilePath: () => string;
+        }
+      | undefined
+    >
+  >();
   constructor(initOptions: InitOptions) {
     this.#modelName = initOptions.modelName;
     this.#sendMessage = (message: any) => {
@@ -54,15 +63,21 @@ export class FileProxyCache {
         ),
       );
 
-      await downloadFile(request, {
-        ...this.#downloadConfig,
-        savePath: filePath,
-        message: this.#sendMessage,
-        headers: {
-          token: this.#initOptions?.hfToken ?? '',
-          'software-bbs': 'bbs.shenghuabi.site',
-        },
-      });
+      if (this.#downloadPromises.has(request)) {
+        await this.#downloadPromises.get(request);
+      } else {
+        const downloadPromise = downloadFile(request, {
+          ...this.#downloadConfig,
+          savePath: filePath,
+          message: this.#sendMessage,
+          headers: {
+            token: this.#initOptions?.hfToken ?? '',
+            'software-bbs': 'bbs.shenghuabi.site',
+          },
+        });
+        this.#downloadPromises.set(request, downloadPromise);
+        await downloadPromise;
+      }
     } else {
       filePath = request;
     }
