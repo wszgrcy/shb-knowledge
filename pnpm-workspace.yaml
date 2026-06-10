@@ -1,0 +1,6 @@
+minimumReleaseAgeExclude:
+  - '@cyia/dl@1.5.7'
+  - '@cyia/external-call@1.5.7'
+  - '@cyia/util@1.5.7'
+  - '@cyia/vfs2@1.5.7'
+  - '@cyia/zip@1.5.7'

@@ -14,10 +14,10 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "@cyia/dl": "^1.5.5",
-    "@cyia/external-call": "^1.5.5",
+    "@cyia/dl": "^1.5.7",
+    "@cyia/external-call": "^1.5.7",
     "@cyia/mdict-reader": "^1.0.10",
-    "@cyia/vfs2": "^1.5.5",
+    "@cyia/vfs2": "^1.5.7",
     "@gutenye/ocr-common": "^1.4.8",
     "@langchain/community": "1.1.1",
     "@langchain/core": "1.1.8",
